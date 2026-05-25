@@ -36,7 +36,7 @@
     .topbar{
       background: linear-gradient(135deg, var(--accent2), #1f2a44);
       color:#fff;
-      padding: 54px 0 56px; /* extra bottom space to accommodate overlap */
+      padding: 54px 0 64px; /* extra bottom space for overlap */
       position: relative;
       overflow: visible;
     }
@@ -71,7 +71,7 @@
       gap:10px;
     }
 
-    /* ✅ HERO-STYLE PROFILE PHOTO */
+    /* ✅ HERO LEFT LAYOUT */
     .hero-left{
       display:flex;
       gap: 18px;
@@ -79,27 +79,26 @@
       flex-wrap:wrap;
     }
 
+    /* ✅ UPDATED: FULL IMAGE, NOT CROPPED, ≥30% SCREEN WIDTH */
     .profile-pic{
-      width: 240px;
-      height: 240px;
+      width: 30vw;            /* >= 30% of viewport width */
+      max-width: 360px;       /* keep it from becoming huge on wide screens */
+      min-width: 220px;       /* keep it prominent on smaller screens */
+      height: auto;           /* preserve full aspect ratio */
       border-radius: 20px;
-      object-fit: cover;
-      object-position: center top; /* tends to crop nicely for portraits */
+      object-fit: contain;    /* ✅ shows full image, no cropping */
+      background: rgba(255,255,255,0.10); /* fills any letterbox area */
       border: 3px solid #ffffff;
       box-shadow: 0 14px 40px rgba(0,0,0,0.35);
-      transform: translateY(22px); /* ✅ overlap down into the page */
-      background: rgba(255,255,255,0.10);
+      transform: translateY(22px); /* ✅ hero overlap effect */
+      display:block;
     }
 
     /* MAIN */
-    main{
-      padding: 28px 0 60px;
-    }
+    main{ padding: 30px 0 60px; }
 
-    /* create a little space at the top so the overlapped image doesn't crash into content */
-    .top-spacer{
-      height: 30px;
-    }
+    /* spacer so overlapped image doesn't collide with top content */
+    .top-spacer{ height: 46px; }
 
     .grid{
       display:grid;
@@ -107,17 +106,19 @@
       gap: 18px;
     }
 
+    /* Mobile / narrow screens: stack layout and keep image large but responsive */
     @media (max-width: 920px){
       .grid{ grid-template-columns: 1fr; }
+
       .profile-pic{
-        width: 180px;
-        height: 180px;
-        transform: translateY(12px);
+        width: 80vw;          /* big on mobile too */
+        max-width: 520px;
+        min-width: 0;
+        transform: translateY(14px);
       }
-      .topbar{
-        padding: 44px 0 48px;
-      }
-      .top-spacer{ height: 18px; }
+
+      .topbar{ padding: 44px 0 56px; }
+      .top-spacer{ height: 28px; }
     }
 
     .card{
@@ -215,10 +216,9 @@
   <header class="topbar">
     <div class="wrap hero">
 
-      <!-- ✅ Left side: Hero-style profile image + Name -->
+      <!-- Left: FULL uncropped hero image + name -->
       <div class="hero-left">
-        <!-- Make sure IMG_3844.JPG exists in your repo root (or adjust src) -->
-        <img class="profile-pic" src="IMG_3844.JPG" alt="Profile photo" />
+        <img class="profile-pic" src="IMG_3844.JPG" alt="Profile image" />
 
         <div>
           <h1>James Shill</h1>
@@ -231,14 +231,14 @@
         </div>
       </div>
 
-      <!-- Right side: Links -->
+      <!-- Right: Links -->
       <div>
         <div class="badge" style="justify-content:flex-end;">
           <span>🔗</span>
           <span>
-            <a href="https://www.linkedin.com/" style="color:#fff; text-decoration:underline;">LinkedIn</a>
+            <a style="color:#fff; text-decoration:underline;" href="https://www.linkedin.com/">LinkedIn</a>
             &nbsp;•&nbsp;
-            <a href="mailto:you@email.com" style="color:#fff; text-decoration:underline;">you@email.com</a>
+            <a style="color:#fff; text-decoration:underline;" href="mailto:you@email.com">you@email.com</a>
           </span>
         </div>
         <div style="margin-top:10px; opacity:0.9;">
@@ -334,20 +334,11 @@
           <h2>Extremely Serious &amp; Definitely-Not-Real Highlights</h2>
           <p class="subtle">
             In addition to engineering, I am internationally renowned for pioneering the field of <strong>quantum-adjacent spreadsheet dynamics</strong>,
-            where I demonstrated that pivot tables become 17% more cooperative when politely asked. This groundbreaking research was
-            peer-reviewed by a panel of highly-qualified houseplants.
+            where pivot tables become 17% more cooperative when politely asked.
           </p>
           <p class="subtle">
             I have also been (allegedly) awarded the <strong>Order of the Titanium Stapler</strong> for outstanding bravery in the face of
-            “Final_Final_v7_REALLYFINAL.xlsx”, and for de-escalating a critical incident involving a jammed printer and a strongly worded
-            status update.
-          </p>
-          <p class="subtle">
-            Charitable work includes donating <strong>3,000 imaginary dollars</strong> to the Society for Underappreciated Engineers Who
-            “Will Totally Update Their Timesheets Tomorrow”, and volunteering as a part-time mentor to lost commas in long sentences.
-          </p>
-          <p class="subtle">
-            If any of the above sounds plausible, please immediately reboot the internet.
+            “Final_Final_v7_REALLYFINAL.xlsx”.
           </p>
         </section>
       </div>
@@ -383,9 +374,6 @@
             <span class="pill">AutoCAD</span>
             <span class="pill">SolidWorks</span>
           </div>
-          <p class="subtle" style="margin-top:10px;">
-            Advanced fluid dynamics computation/modelling of compressible fluids (rough pipe / aerofoil analysis).
-          </p>
         </section>
 
         <section class="card" style="margin-top:18px;">
@@ -400,14 +388,6 @@
           <h2>Professional</h2>
           <p class="subtle" style="margin:0;">
             <strong>Engineers Australia</strong> — Professional Member (MIEAust)
-          </p>
-        </section>
-
-        <section class="card" style="margin-top:18px;">
-          <h2>Downloads</h2>
-          <p class="subtle">
-            <a href="resume.pdf">Download Resume (PDF)</a><br />
-            <small>Upload your resume into this repo as <code>resume.pdf</code> to enable this link.</small>
           </p>
         </section>
       </aside>
