@@ -21,6 +21,7 @@
       --radius: 16px;
     }
     *{ box-sizing:border-box; }
+
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
@@ -31,11 +32,15 @@
     a{ color: var(--accent); text-decoration:none; }
     a:hover{ text-decoration:underline; }
 
+    /* HEADER */
     .topbar{
       background: linear-gradient(135deg, var(--accent2), #1f2a44);
       color:#fff;
-      padding: 54px 0 38px;
+      padding: 54px 0 56px; /* extra bottom space to accommodate overlap */
+      position: relative;
+      overflow: visible;
     }
+
     .wrap{ max-width: 980px; margin: 0 auto; padding: 0 20px; }
 
     .hero{
@@ -66,232 +71,36 @@
       gap:10px;
     }
 
-    /* ✅ Profile photo styling */
+    /* ✅ HERO-STYLE PROFILE PHOTO */
     .hero-left{
       display:flex;
       gap: 18px;
       align-items:flex-start;
       flex-wrap:wrap;
     }
+
     .profile-pic{
-      width: 220px;
-      height: 220px;
-      border-radius: 18px;
+      width: 240px;
+      height: 240px;
+      border-radius: 20px;
       object-fit: cover;
-      object-position: center top; /* helps crop nicely */
-      border: 2px solid rgba(255,255,255,0.25);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+      object-position: center top; /* tends to crop nicely for portraits */
+      border: 3px solid #ffffff;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+      transform: translateY(22px); /* ✅ overlap down into the page */
+      background: rgba(255,255,255,0.10);
     }
 
-    main{ padding: 22px 0 60px; }
+    /* MAIN */
+    main{
+      padding: 28px 0 60px;
+    }
+
+    /* create a little space at the top so the overlapped image doesn't crash into content */
+    .top-spacer{
+      height: 30px;
+    }
+
     .grid{
       display:grid;
       grid-template-columns: 1.2fr 0.8fr;
-      gap: 18px;
-    }
-    @media (max-width: 920px){
-      .grid{ grid-template-columns: 1fr; }
-      .profile-pic{ width: 120px; height: 120px; }
-    }
-
-    .card{
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 20px;
-    }
-    .card h2{
-      margin:0 0 10px;
-      font-size: 1.15rem;
-      letter-spacing:-0.01em;
-    }
-    .subtle{ color: var(--muted); }
-
-    .pills{ display:flex; flex-wrap:wrap; gap:10px; }
-    .pill{
-      display:inline-flex;
-      background: var(--pill);
-      color: var(--pillink);
-      border-radius: 999px;
-      padding: 7px 10px;
-      font-size: 0.92rem;
-      border: 1px solid rgba(37, 99, 235, 0.10);
-    }
-
-    .kpi{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 12px;
-    }
-    .kpi .box{
-      border:1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px;
-      background: #fbfcff;
-    }
-    .kpi .box .label{ color: var(--muted); font-size: 0.9rem; }
-    .kpi .box .value{ font-weight: 650; margin-top: 4px; }
-
-    .timeline{ margin: 10px 0 0; padding-left: 18px; }
-    .timeline li{ margin: 10px 0; }
-
-    .proj{
-      padding: 12px 12px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: #ffffff;
-      margin-top: 10px;
-    }
-    .proj .title{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      font-weight: 650;
-    }
-    .proj .tag{
-      font-weight: 500;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-    .proj ul{ margin: 8px 0 0; padding-left: 18px; }
-    .proj li{ margin: 6px 0; }
-
-    .footer{
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 0.92rem;
-      text-align:center;
-      opacity:0.95;
-    }
-
-    /* Satire block clearly marked */
-    .satire{
-      border: 2px dashed rgba(37,99,235,0.35);
-      background: linear-gradient(180deg, #ffffff, #f8fbff);
-    }
-    .satire .warn{
-      display:inline-block;
-      background: rgba(37,99,235,0.12);
-      border: 1px solid rgba(37,99,235,0.18);
-      color: #1e3a8a;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      margin-bottom: 10px;
-    }
-  </style>
-</head>
-
-<body>
-  <header class="topbar">
-    <div class="wrap hero">
-
-      <!-- ✅ Left side: Profile image + Name -->
-      <div class="hero-left">
-        <!-- IMPORTANT: Make sure IMG_3844.JPG is uploaded to your repo root -->
-        <img class="profile-pic" src="IMG_3844.JPG" alt="Profile photo" />
-
-        <div>
-          <h1>James Shill</h1>
-          <div class="role">Mechanical Engineer</div>
-          <div class="meta">
-            <span class="badge">📍 Australia</span>
-            <span class="badge">🏢 Lycopodium (2024 – present)</span>
-            <span class="badge">🧩 Design • Procurement • Project Engineering</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right side: Links -->
-      <div>
-        <div class="badge" style="justify-content:flex-end;">
-          <span>🔗</span>
-          <span>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-            &nbsp;•&nbsp;
-            <a href="mailto:you@email.com">you@email.com</a>
-          </span>
-        </div>
-        <div style="margin-top:10px; opacity:0.9;">
-          <small>Tip: Replace the LinkedIn + email with your real links.</small>
-        </div>
-      </div>
-
-    </div>
-  </header>
-
-  <main class="wrap">
-    <div class="grid">
-      <!-- LEFT COLUMN -->
-      <div class="left">
-        <section class="card">
-          <h2>About</h2>
-          <p class="subtle">
-            Mechanical engineer with experience delivering across a broad spectrum of industry settings,
-            from hygienic/sanitary design environments to minerals processing. I bring disciplined engineering
-            practice from studies through to detailed design and procurement, with a focus on clear communication,
-            proactive coordination, and reliable delivery.
-          </p>
-          <p class="subtle">
-            I’ve executed end-to-end equipment design from engineering calculations through to procurement.
-            This includes pump and line sizing, pressure-drop verification, and compressible-flow analysis in hydraulic
-            network software, integrated with design assurance tasks like refining P&IDs and reviewing models.
-            I also enjoy building small automation tools (Python/VBA/Excel) to reduce repetitive effort and improve auditability.
-          </p>
-
-          <div class="kpi">
-            <div class="box">
-              <div class="label">Core focus</div>
-              <div class="value">Mechanical design → procurement → delivery support</div>
-            </div>
-            <div class="box">
-              <div class="label">Strengths</div>
-              <div class="value">Pragmatic planning + clear stakeholder comms</div>
-            </div>
-          </div>
-        </section>
-
-        <section class="card" style="margin-top:18px;">
-          <h2>Key Projects</h2>
-
-          <div class="proj">
-            <div class="title">
-              <span>Cauldron Facility Expansion</span>
-              <span class="tag">Mechanical Engineer</span>
-            </div>
-            <ul class="subtle">
-              <li>Undertook design, tendering, and recommendation for award for the Design Phase supporting plant expansion works at the new facility.</li>
-            </ul>
-          </div>
-
-          <div class="proj">
-            <div class="title">
-              <span>KNP H₂S Plant</span>
-              <span class="tag">Mechanical + Project Engineering</span>
-            </div>
-            <ul class="subtle">
-              <li>Supported tendering of equipment and provided client cost and deliverable status reporting.</li>
-              <li>Contributed to the definitive feasibility study for a Hydrogen Sulphide plant supporting mining operations.</li>
-            </ul>
-          </div>
-
-          <div class="proj">
-            <div class="title">
-              <span>Reswax Extraction Plant</span>
-              <span class="tag">Mechanical + Project Engineering</span>
-            </div>
-            <ul class="subtle">
-              <li>Oversaw pump calculations through to tender packages.</li>
-              <li>Managed document control, resource allocation/loading, and schedule support.</li>
-              <li>Supported solvent extraction plant delivering high-quality resins and waxes for global markets.</li>
-            </ul>
-          </div>
-
-          <div class="proj">
-            <div class="title">
-              <span>Pilbara Minerals (Midstream)</span>
-              <span class="tag">Key project exposure</span>
-            </div>
